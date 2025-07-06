@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michal Šanda | Aplikace na míru.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
+
+</head>
+<body class="font-sans leading-relaxed h-screen flex flex-col overflow-hidden bg-cover bg-center min-h-screen" style="background-image: url('1.jpg');">
+
+  <main class="flex-1 flex flex-col xl:grid grid-cols-3 gap-x-20 gap-y-4 xl:gap-y-0 xl:px-4 xl:py-8 overflow-auto">
+
+    <div class="flex flex-col justify-between flex-1">
+      <section id="about" class="p-4 text-start space-y-4 border-2 border-black xl:rounded-xl rounded-b-xl max-h-fit bg-white/40 backdrop-blur-lg">
+        <h1 class="text-5xl font-bold mb-2">Michal Šanda</h1>
+        <p class="text-4xl">Tvořím webové a desktopové aplikace.</p>
+        <p class="text-2xl">
+        Jsem vývojář zaměřující se na tvorbu rychlých a jednoduchých webových i desktopových aplikací.
+        </p>
+        <p class="text-2xl">
+        Nepoužívám šablony, takže si můžete vybrat design, který Vám sedí.
+        </p>
+        <p class="text-2xl">
+        Mám rád čistý kód, funkční design a efektivní řešení.
+        </p>
+        <h2 class="text-2xl font-semibold mb-4">Kontakt</h2>
+        <div class="space-y-0">
+          <p class="text-xl">Tel. : 733 203 451</p>
+          <p class="text-xl">Email:  sandamichal94@gmail.com</p>
+        </div>
+      </section>
+
+      <section x-cloak x-data="{ open: false }" id="contact" class="hidden xl:flex">
+        <button @click="open = true; $nextTick(() => focusFirstElement())" class="w-full border-black border-2 rounded-xl text-xl p-4 bg-white/40 backdrop-blur-lg mb-4 xl:mb-0">Kontaktní formulář</button>
+          <div x-show="open" x-trap="open" class="fixed inset-0 z-50 flex items-center justify-center w-[100%] h-[100%]" aria-modal="true" role="dialog"> 
+            <div @click.away="open = false" @keydown.escape="open = false">
+            <form id="contact-form" method="POST" class="p-4 border-2 border-black rounded-xl max-h-screen xl:max-h-fit bg-white/40 backdrop-blur-lg w-screen md:w-[500px] lg:w-[600px]">
+                <div class="mb-4">
+                    <label for="email" class="block font-medium mb-2">Váš e-mail:</label>
+                    <input type="email" id="email" name="email" required
+                          class="w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
+                <div class="mb-2">
+                  <label for="message" class="block font-medium mb-2">Zpráva:</label>
+                  <textarea id="message" name="message" rows="5" required
+                            class="w-full px-4 py-2 border border-black rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <span class="text-sm text-center">Vaše osobní údaje nebudou nikde zveřeněny, nebo použity k jiným ůčelum než pro případnou komunikaci ohledně projektu.</span>
+                <div class="text-center">
+                  <button type="submit"
+                          class="bg-white/40 backdrop-blur-lg font-medium px-6 py-2 rounded-lg hover:bg-white/10 transition duration-200 mt-2">
+                    Odeslat
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+      </section>
+    </div>
+
+    <section id="projects">
+      
+    </section>
+
+    <div class="flex flex-col justify-between flex-1 space-y-4">
+      <section id="contact" class="p-4 text-start space-y-4 border-2 border-black rounded-xl max-h-fit bg-white/40 backdrop-blur-lg">
+        <h2 class="text-2xl font-semibold mb-4">Co používám pro tvorbu?</h2>
+        <p class="text-xl">
+        Python, Django, Flask, JS, Alpine.js, HTMX, Tailwind, SQLite, PostgreSQL, MongoDB, Stripe, Railway
+        </p>
+      </section>
+      <section id="contact" class="p-4 text-start mt-auto space-y-4 border-2 border-black rounded-xl max-h-fit bg-white/40 backdrop-blur-lg">
+        <h2 class="text-2xl font-semibold mb-4">Projekty</h2>
+        <div class="grid gap-4">
+          <div class="border p-4 rounded-xl shadow-sm hover:shadow-md transition">
+            <h3 class="font-semibold text-lg">Konstrukční dokumentace</h3>
+            <p class="text-sm">Desktopová aplikace číslování výrobní dokumentace.</p>
+          </div>
+          <div class="border p-4 rounded-xl shadow-sm hover:shadow-md transition">
+            <h3 class="font-semibold text-lg">ConnectCode</h3>
+            <p class="text-sm">Webový pracovní portál pro lidi z IT oboru.</p>
+          </div>
+          <div class="border p-4 rounded-xl shadow-sm hover:shadow-md transition">
+            <h3 class="font-semibold text-lg">Konstrukční dokumentace</h3>
+            <p class="text-sm">Desktopová aplikace číslování výrobní dokumentace.</p>
+          </div>
+          <div class="border p-4 rounded-xl shadow-sm hover:shadow-md transition">
+            <h3 class="font-semibold text-lg">ConnectCode</h3>
+            <p class="text-sm">Webový pracovní portál pro lidi z IT oboru.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+
+    <section x-cloak x-data="{ open: false }" id="contact" class="w-full xl:hidden">
+      <button @click="open = true; $nextTick(() => focusFirstElement())" class="w-full border-black border-2 rounded-xl text-xl p-4 bg-white/40 backdrop-blur-lg mb-4 xl:mb-0">Kontaktní formulář</button>
+        <div x-show="open" x-trap="open" class="fixed inset-0 z-50 flex items-center justify-center w-[100%] h-[100%]" aria-modal="true" role="dialog"> 
+          <div @click.away="open = false" @keydown.escape="open = false">
+          <form id="contact-form-2" method="POST" class="p-4 border-2 border-black rounded-xl max-h-screen xl:max-h-fit bg-white/40 backdrop-blur-lg w-screen md:w-[500px] lg:w-[600px]">
+              <div class="mb-4">
+                  <label for="email" class="block font-medium mb-2">Váš e-mail:</label>
+                  <input type="email" id="email" name="email" required
+                        class="w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              </div>
+              <div class="mb-2">
+                <label for="message" class="block font-medium mb-2">Zpráva:</label>
+                <textarea id="message" name="message" rows="5" required
+                          class="w-full px-4 py-2 border border-black rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+              </div>
+              <span class="text-sm text-center">Vaše osobní údaje nebudou nikde zveřeněny, nebo použity k jiným ůčelum než pro případnou komunikaci ohledně projektu.</span>
+              <div class="text-center">
+                <button type="submit"
+                        class="bg-white/40 backdrop-blur-lg font-medium px-6 py-2 rounded-lg hover:bg-white/10 transition duration-200 mt-2">
+                  Odeslat
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+    </section>
+
+  </main>
+
+  <footer class="mt-auto text-center text-sm text-gray-500 p-6 xl:pb-6">
+    &copy; 2025 Michal Šanda. All rights reserved.  IČO:23312777
+  </footer>
+
+</body>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+  (function() {
+    emailjs.init("HtTi7qZm_HlG_DEq3");
+  })();
+
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    emailjs.sendForm('service_2isd3ho', 'template_l3xmr4i', this)
+      .then(() => {
+        alert("Zpráva odeslána!");
+      }, (error) => {
+        alert("Chyba při odesílání: " + error.text);
+      });
+  });
+
+  document.getElementById('contact-form-2').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    emailjs.sendForm('service_2isd3ho', 'template_l3xmr4i', this)
+      .then(() => {
+        alert("Zpráva odeslána!");
+      }, (error) => {
+        alert("Chyba při odesílání: " + error.text);
+      });
+  });
+</script>
+</html>

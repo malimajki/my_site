@@ -4,10 +4,39 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Michal Šanda | Aplikace na míru.</title>
+  <meta name="description" content="Jsem Michal Šanda, web developer specializující se na Python, Django a moderní webové technologie." />
+
+  <!-- Favicons pro prohlížeče -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+  <link rel="shortcut icon" href="favicons/favicon.ico">
+
+  <!-- Apple iOS ikona -->
+  <link rel="apple-touch-icon" href="favicons/apple-touch-icon.png">
+
+  <!-- Android Chrome -->
+  <link rel="icon" type="image/png" sizes="192x192" href="favicons/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="favicons/android-chrome-512x512.png">
+
+  <!-- Web manifest (pro PWA nebo přidání na domovskou obrazovku) -->
+  <link rel="manifest" href="favicons/site.webmanifest">  
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Michal Šanda – Web developer a programátor">
+  <meta property="og:description" content="Portfolio web vývojáře specializujícího se na Python a Django.">
+  <meta property="og:url" content="https://sandamichal.cz">
+  <meta name="twitter:card" content="summary_large_image">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <style>
     [x-cloak] { display: none !important; }
+    main {
+      font-family: "Didact Gothic", sans-serif;
+    }
     .card-style {
       padding: 1rem; /* p-4 */
       text-align: start; /* text-start */
@@ -23,7 +52,7 @@
   </style>
 
 </head>
-<body class="font-sans leading-relaxed h-screen flex flex-col overflow-hidden bg-cover bg-center min-h-screen" style="background-image: url('1.jpg');">
+<body class="font-sans leading-relaxed h-screen flex flex-col overflow-hidden bg-cover bg-center min-h-screen" alt="background abstract image" style="background-image: url('1.jpg');">
 
   <main class="flex-1 flex flex-col xl:grid grid-cols-3 gap-x-20 gap-y-4 xl:gap-y-0 xl:px-4 xl:py-8 overflow-auto" x-data="{ tab: 'tab0' }">
 
@@ -79,7 +108,7 @@
       <div x-cloak>
         <div x-show="tab == 'tab0'"></div>
         <div x-show="tab == 'tab1'" class="card-style">
-          <h3 class="text-3xl font-bold">ConnectCode</h3>
+          <h3 class="text-3xl font-bold">ConnectCode.cz</h3>
           <p class="text-xl/7">Tato webová aplikace slouží jako tržiště pro pracovní nabídky a poptávky v IT oboru. Uživatelé i firmy mohou publikovat své inzeráty, přičemž nabídky práce podléhají placenému subscription plánu. Aplikace obsahuje integrovaný inbox pro soukromou komunikaci mezi uživateli a automaticky upozorňuje e-mailem na nepřečtené zprávy. Registrace je možná přes Google nebo GitHub, a uživatelé mohou zároveň vytvořit i firemní profil.</p>
           <ul class="text-lg">
             <li>- Publikace pracovních nabídek a poptávek v oblasti IT.</li>
@@ -120,9 +149,9 @@
               class="font-semibold text-lg"  href="#" 
               :class="{ 'underline text-xl': tab == 'tab1'}"
               @click.prevent="tab = 'tab1'"
-              >ConnectCode
+              >ConnectCode.cz
             </a>
-            <p class="text-sm">Desktopová aplikace číslování výrobní dokumentace.</p>
+            <p class="text-sm">Webová aplikace pro inzerci pracovních příležitostí v sektoru IT.</p>
           </div>
           <div class="border p-4 rounded-xl shadow-sm hover:shadow-md transition">
             <a
@@ -207,5 +236,19 @@
         alert("Chyba při odesílání: " + error.text);
       });
   });
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Michal Šanda",
+  "url": "https://sandamichal.cz",
+  "jobTitle": "Web developer",
+  "description": "Web developer specializující se na Python a Django",
+  "sameAs": [
+    "https://github.com/...",
+    "https://www.linkedin.com/in/..."
+  ]
+}
 </script>
 </html>

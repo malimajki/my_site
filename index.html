@@ -31,13 +31,14 @@
   <script defer src="js/alpine.min.js"></script>
   <link rel="stylesheet" href="css/tailwind.css">
   <link rel="stylesheet" href="css/fonts.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="font-sans leading-relaxed h-screen flex flex-col overflow-hidden bg-cover bg-center min-h-screen" alt="background abstract image" style="background-image: url('1.jpg');">
+<body class="font-sans leading-relaxed h-screen flex flex-col overflow-hidden bg-gradient-to-br from-gray-900 via-gray-700 to-gray-500 min-h-screen">
 
-  <main class="flex-1 flex flex-col xl:grid grid-cols-3 gap-x-20 gap-y-4 xl:gap-y-0 xl:px-4 xl:py-8 overflow-auto" x-data="{ tab: 'tab0' }">
+  <main class="flex-1 flex flex-col xl:grid grid-cols-3 gap-x-20 gap-y-4 xl:gap-y-0 xl:px-8 xl:py-8 overflow-auto" x-data="{ tab: 'tab0' }">
 
     <div class="flex flex-col justify-between flex-1">
-      <section id="about" class="card-style">
+      <section id="about" class="card-style-top rounded-b-[1rem] xl:rounded-[1rem]">
         <h1 class="text-5xl font-bold mb-2">Michal Šanda</h1>
         <h2 class="text-3xl">Navrhuji a vyvíjím moderní weby, které jsou rychlé, bezpečné a snadno rozšiřitelné.</h2>
         <p class="text-2xl">
@@ -57,7 +58,7 @@
       </section>
 
       <section x-cloak x-data="{ open: false }" id="contact" class="hidden xl:flex">
-        <button @click="open = true; $nextTick(() => focusFirstElement())" class="w-full card-style xl:mb-0">Kontaktní formulář</button>
+        <button @click="open = true; $nextTick(() => focusFirstElement())" class="transition duration-200 text-xl w-full card-style xl:mb-0 hover:cursor-pointer hover:scale-105">Kontaktní formulář</button>
           <div x-show="open" x-trap="open" class="fixed inset-0 z-50 flex items-center justify-center w-[100%] h-[100%]" aria-modal="true" role="dialog"> 
             <div @click.away="open = false" @keydown.escape="open = false">
             <form id="contact-form" method="POST" @submit.prevent="open = false" class="card-style w-screen md:w-[500px] lg:w-[600px]">
@@ -74,7 +75,7 @@
                 <span class="text-sm text-center">*Vaše osobní údaje nebudou nikde zveřeněny, nebo použity k jiným ůčelum než pro případnou komunikaci ohledně projektu.</span>
                 <div class="text-center">
                   <button type="submit"
-                          class="border-2 border-black bg-white/70 backdrop-blur-lg font-medium px-6 py-2 rounded-lg hover:bg-white/10 transition duration-200 mt-2">
+                          class="border-2 border-black bg-white/70 backdrop-blur-lg font-medium px-6 py-2 rounded-lg hover:bg-white/10 transition duration-200 mt-2 hover:cursor-pointer">
                     Odeslat
                   </button>
                 </div>
@@ -85,9 +86,26 @@
     </div>
 
     <section id="projects">
-      <div x-cloak>
+      <div x-cloak class="relative">
         <div x-show="tab == 'tab0'"></div>
-        <div x-show="tab == 'tab1'" class="card-style">
+        <div x-show="tab == 'tab1'"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 translate-x-10"
+        x-transition:enter-end="opacity-100 translate-x-0"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 translate-x-0"
+        x-transition:leave-end="opacity-0 translate-x-10" 
+        class="xl:absolute top-0 left-0 w-full">
+          <div class="relative card-style ">
+            <a
+              class="font-semibold text-lg absolute top-4 right-4"  href="#" 
+              :class="{ 'underline text-xl': tab == 'tab0'}"
+              @click.prevent="tab = 'tab0'"
+              >
+                <svg class="h-8 w-8 flex transition duration-150 hover:text-red-500 hover:scale-125" viewBox="0 0 24 24">
+                  <path fill="currentColor" clip-rule="evenodd" d="M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z" fill="#000000"></path> 
+                </svg>
+            </a>
           <h3 class="text-3xl font-bold">ConnectCode.cz</h3>
           <p class="text-xl/7">Tato webová aplikace slouží jako tržiště pro pracovní nabídky a poptávky v IT oboru. Uživatelé i firmy mohou publikovat své inzeráty, přičemž nabídky práce podléhají placenému subscription plánu. Aplikace obsahuje integrovaný inbox pro soukromou komunikaci mezi uživateli a automaticky upozorňuje e-mailem na nepřečtené zprávy. Registrace je možná přes Google nebo GitHub, a uživatelé mohou zároveň vytvořit i firemní profil.</p>
           <ul class="text-lg">
@@ -100,23 +118,71 @@
           <div class="text-end">
             <a class="hover:underline" target="_blank" href="https://www.connectcode.cz/">www.connectcode.cz</a>
           </div>
-        </div>
-        <div x-show="tab == 'tab2'" class="card-style">
-          <h3 class="text-3xl font-bold">Konstrukční dokumentace</h3>
-          <p class="text-xl/7">Tato desktopová aplikace slouží k evidenci zakázek a automatickému číslování výrobní dokumentace. Umožňuje přehlednou správu položek, import objednávek a generování čísel výkresů dle firemního standardu.</p>
-          <ul class="text-lg">
-            <li>- Vytváření zakázek a přidávání položek.</li>
-            <li>- Import objednávek ve formátu PDF (automatické načtení čísla zakázky a položek).</li>
-            <li>- Automatické generování čísel výkresů ve formátu K-XXX-YY, např. K-546-01.</li>
-            <li>- Záznam data a přihlášeného uživatele (z Windows) při generování čísla.</li>
-            <li>- Úpravy položek, možnost ručně mazat a měnit čísla výkresů.</li>
-            <li>- Automatické odstranění metadat při smazání čísla výkresu.</li>
-            <li>- Vyhledávání a filtrování.</li>
-          </ul>
-          <div class="text-end">
-            <a class="hover:underline" target="_blank" href="https://github.com/malimajki/zakazky">Github - Konstrukční dokumentace</a>
           </div>
         </div>
+        <div x-show="tab == 'tab2'"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 translate-x-10"
+        x-transition:enter-end="opacity-100 translate-x-0"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 translate-x-0"
+        x-transition:leave-end="opacity-0 translate-x-10" 
+        class="xl:absolute top-0 left-0 w-full">
+          <div class="relative card-style ">
+            <a
+                class="font-semibold text-lg absolute top-4 right-4"  href="#" 
+                :class="{ 'underline text-xl': tab == 'tab0'}"
+                @click.prevent="tab = 'tab0'"
+                >
+                  <svg class="h-8 w-8 flex transition duration-150 hover:text-red-500 hover:scale-125" viewBox="0 0 24 24">
+                    <path fill="currentColor" clip-rule="evenodd" d="M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z" fill="#000000"></path> 
+                  </svg>
+            </a>
+            <h3 class="text-3xl font-bold">Konstrukční dokumentace</h3>
+            <p class="text-xl/7">Tato desktopová aplikace slouží k evidenci zakázek a automatickému číslování výrobní dokumentace. Umožňuje přehlednou správu položek, import objednávek a generování čísel výkresů dle firemního standardu.</p>
+            <ul class="text-lg">
+              <li>- Vytváření zakázek a přidávání položek.</li>
+              <li>- Import objednávek ve formátu PDF (automatické načtení čísla zakázky a položek).</li>
+              <li>- Automatické generování čísel výkresů ve formátu K-XXX-YY, např. K-546-01.</li>
+              <li>- Záznam data a přihlášeného uživatele (z Windows) při generování čísla.</li>
+              <li>- Úpravy položek, možnost ručně mazat a měnit čísla výkresů.</li>
+              <li>- Automatické odstranění metadat při smazání čísla výkresu.</li>
+              <li>- Vyhledávání a filtrování.</li>
+            </ul>
+            <div class="text-end">
+              <a class="hover:underline" target="_blank" href="https://github.com/malimajki/zakazky">Github - Konstrukční dokumentace</a>
+            </div>
+          </div>
+        </div>
+        <div x-show="tab == 'tab3'"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 translate-x-10"
+        x-transition:enter-end="opacity-100 translate-x-0"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 translate-x-0"
+        x-transition:leave-end="opacity-0 translate-x-10" 
+        class="xl:absolute top-0 left-0 w-full">
+          <div class="relative card-style ">
+            <a
+                class="font-semibold text-lg absolute top-4 right-4"  href="#" 
+                :class="{ 'underline text-xl': tab == 'tab0'}"
+                @click.prevent="tab = 'tab0'"
+                >
+                  <svg class="h-8 w-8 flex transition duration-150 hover:text-red-500 hover:scale-125" viewBox="0 0 24 24">
+                    <path fill="currentColor" clip-rule="evenodd" d="M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z" fill="#000000"></path> 
+                  </svg>
+            </a>
+            <h3 class="text-3xl font-bold">Anonymní hypoteční kalkulačka</h3>
+            <p class="text-xl/7">Hypoteční klakulačka, která spočítá maximální teoretickou výši hypotéky, dle hodnot zadaných uživatelem.</p>
+            <p class="text-lg">
+              Jednoduchá webová plikace, pro výpočet hypotéky. Výše hypotéky je ovlivněna buď přijmi, nebo našetřenou jistinou.
+            </p>
+            <div class="text-end">
+              <a class="hover:underline" target="_blank" href="https://github.com/malimajki/zakazky">Anonimnikalkulacka.cz</a>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     </section>
 
@@ -142,19 +208,67 @@
             </a>
             <p class="text-sm">Desktopová aplikace číslování výrobní dokumentace.</p>
           </div>
+          <div class="border p-4 rounded-xl shadow-sm hover:shadow-md transition">
+            <a
+              class="font-semibold text-lg"  href="#" 
+              :class="{ 'underline text-xl': tab == 'tab3'}"
+              @click.prevent="tab = 'tab3'"
+              >Anonimníhypotéka.cz
+            </a>
+            <p class="text-sm">Webová aplikace pro teoretický výpočet výše hypotéky.</p>
+          </div>
+          <div class="border p-4 rounded-xl shadow-sm hover:shadow-md transition">
+            <a
+              class="font-semibold text-lg"  href="#" 
+              :class="{ 'underline text-xl': tab == 'tab2'}"
+              @click.prevent="tab = 'tab2'"
+              >Konstrukční dokumentace
+            </a>
+            <p class="text-sm">Desktopová aplikace číslování výrobní dokumentace.</p>
+          </div>
+          <div class="border p-4 rounded-xl shadow-sm hover:shadow-md transition">
+            <a
+              class="font-semibold text-lg"  href="#" 
+              :class="{ 'underline text-xl': tab == 'tab2'}"
+              @click.prevent="tab = 'tab2'"
+              >Konstrukční dokumentace
+            </a>
+            <p class="text-sm">Desktopová aplikace číslování výrobní dokumentace.</p>
+          </div>
         </div>
       </section>
       <section id="contact" class="card-style">
         <h2 class="text-2xl font-semibold mb-4">Co používám pro tvorbu?</h2>
-        <p class="text-xl">
-        Python, Django, Flask, HTML, CSS, JS, Alpine.js, HTMX, Tailwind, SQLite, PostgreSQL, MongoDB, Stripe, <a href="./forum.html">Railway</a>
+        <p class="text-xl font-bold">
+        Jazyky
+        </p>
+        <p class="text-xl mt-[-15px]">
+        Python, JS, HTML, CSS
+        </p>
+        <p class="text-xl font-bold">
+        Frameworky
+        </p>
+        <p class="text-xl mt-[-15px]">
+        Django, Flask, Alpine.js, HTMX, Tailwind
+        </p>
+        <p class="text-xl font-bold">
+        Databáze
+        </p>
+        <p class="text-xl mt-[-15px]">
+        SQLite, PostgreSQL, MongoDB
+        </p>
+        <p class="text-xl font-bold">
+        Ostatní nástroje
+        </p>
+        <p class="text-xl mt-[-15px]">
+        VS Code, Stripe, Railway
         </p>
       </section>
     </div>
 
 
     <section x-cloak x-data="{ open: false }" id="contact" class="w-full xl:hidden">
-      <button @click="open = true; $nextTick(() => focusFirstElement())" class="w-full border-black border-2 rounded-xl text-xl p-4 bg-white/40 backdrop-blur-lg mb-4 xl:mb-0">Kontaktní formulář</button>
+      <button @click="open = true; $nextTick(() => focusFirstElement())" class="w-full border-black border-2 rounded-xl text-xl p-4 bg-white/40 mb-4 xl:mb-0">Kontaktní formulář</button>
         <div x-show="open" x-trap="open" class="fixed inset-0 z-50 flex items-center justify-center w-[100%] h-[100%]" aria-modal="true" role="dialog"> 
           <div @click.away="open = false" @keydown.escape="open = false">
           <form id="contact-form-2" method="POST" @submit.prevent="open = false" class="card-style w-screen md:w-[500px] lg:w-[600px]">
@@ -182,7 +296,7 @@
 
   </main>
 
-  <footer class="mt-auto text-center text-sm text-gray-500 p-6 xl:pb-6">
+  <footer class="mt-auto text-center text-sm text-gray-400 p-6 xl:pb-6">
     &copy; 2025 Michal Šanda. All rights reserved.  IČO:23312777
   </footer>
 

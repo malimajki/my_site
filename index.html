@@ -107,6 +107,7 @@
                 </svg>
             </a>
           <h3 class="text-3xl font-bold">ConnectCode.cz</h3>
+          <img src="CC.png" alt="ConnectCode-screenshot">
           <p class="text-xl/7">Tato webová aplikace slouží jako tržiště pro pracovní nabídky a poptávky v IT oboru. Uživatelé i firmy mohou publikovat své inzeráty, přičemž nabídky práce podléhají placenému subscription plánu. Aplikace obsahuje integrovaný inbox pro soukromou komunikaci mezi uživateli a automaticky upozorňuje e-mailem na nepřečtené zprávy. Registrace je možná přes Google nebo GitHub, a uživatelé mohou zároveň vytvořit i firemní profil.</p>
           <ul class="text-lg">
             <li>- Publikace pracovních nabídek a poptávek v oblasti IT.</li>
@@ -115,9 +116,14 @@
             <li>- Přihlášení přes Google nebo GitHub účty.</li>
             <li>- Možnost vytvoření a správy firemního profilu.</li>
           </ul>
-          <div class="text-end">
-            <a class="hover:underline" target="_blank" href="https://www.connectcode.cz/">www.connectcode.cz</a>
-          </div>
+          <div class="flex md:flex-row flex-col justify-between gap-4">
+              <div class="text-xl font-semibold">
+                <span class="text-base font-normal">technologie: </span>Python, HTML, TailwindCSS, Stripe, PostgreSQL, Alpine.js
+              </div>
+              <div>
+                <a class="hover:underline" target="_blank" href="https://www.connectcode.cz/">www.connectcode.cz</a>
+              </div>
+            </div>
           </div>
         </div>
         <div x-show="tab == 'tab2'"
@@ -139,6 +145,10 @@
                   </svg>
             </a>
             <h3 class="text-3xl font-bold">Konstrukční dokumentace</h3>
+            <img id="popup-img" src="KD.png" alt="KontrukčníDokumentace-screenshot" class="cursor-pointer">
+            <div id="img-modal" class="hidden fixed inset-0 bg-black flex items-center justify-center z-[9999]">
+              <img id="modal-content" class="h-auto w-auto max-h-screen max-w-screen object-contain">
+            </div>
             <p class="text-xl/7">Tato desktopová aplikace slouží k evidenci zakázek a automatickému číslování výrobní dokumentace. Umožňuje přehlednou správu položek, import objednávek a generování čísel výkresů dle firemního standardu.</p>
             <ul class="text-lg">
               <li>- Vytváření zakázek a přidávání položek.</li>
@@ -149,8 +159,13 @@
               <li>- Automatické odstranění metadat při smazání čísla výkresu.</li>
               <li>- Vyhledávání a filtrování.</li>
             </ul>
-            <div class="text-end">
-              <a class="hover:underline" target="_blank" href="https://github.com/malimajki/zakazky">Github - Konstrukční dokumentace</a>
+            <div class="flex md:flex-row flex-col justify-between md:gap-0 gap-4">
+              <div class="text-xl font-semibold">
+                <span class="text-base font-normal">technologie: </span>Python, SQLite, PyQt6
+              </div>
+              <div>
+                <a class="hover:underline" target="_blank" href="https://github.com/malimajki/zakazky">Github</a>
+              </div>
             </div>
           </div>
         </div>
@@ -173,12 +188,18 @@
                   </svg>
             </a>
             <h3 class="text-3xl font-bold">Anonymní hypoteční kalkulačka</h3>
+            <img src="HK.png" alt="HypotečníKalkulačka-screenshot">
             <p class="text-xl/7">Hypoteční klakulačka, která spočítá maximální teoretickou výši hypotéky, dle hodnot zadaných uživatelem.</p>
             <p class="text-lg">
-              Jednoduchá webová plikace, pro výpočet hypotéky. Výše hypotéky je ovlivněna buď přijmi, nebo našetřenou jistinou.
+              Jednoduchá jednostránková webová aplikace, pro výpočet hypotéky. Výše hypotéky je ovlivněna buď přijmi, nebo našetřenou jistinou.
             </p>
-            <div class="text-end">
-              <a class="hover:underline" target="_blank" href="https://github.com/malimajki/zakazky">Anonimnikalkulacka.cz</a>
+            <div class="flex md:flex-row flex-col justify-between gap-4">
+              <div class="text-xl font-semibold">
+                <span class="text-base font-normal">technologie: </span>HTML, JS
+              </div>
+              <div>
+                <a class="hover:underline" target="_blank" href="https://github.com/malimajki/zakazky">Anonimnikalkulacka.cz</a>
+              </div>
             </div>
           </div>
         </div>
@@ -303,6 +324,31 @@
 </body>
 <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script>
+  const img = document.getElementById("popup-img");
+  const modal = document.getElementById("img-modal");
+  const modalContent = document.getElementById("modal-content");
+
+  // Open fullscreen
+  img.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+    modalContent.src = img.src;
+  });
+
+  // Close on click
+  modal.addEventListener("click", () => {
+    modal.classList.add("hidden");
+    modalContent.src = "";
+  });
+
+  // Close on ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      modal.classList.add("hidden");
+      modalContent.src = "";
+    }
+  });
 </script>
 <script type="text/javascript">
   (function() {
